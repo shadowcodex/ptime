@@ -1,12 +1,21 @@
-# ptime
+# quick-ptime
 
 A simple performance timer based off process.hrtime
 
+## Installation
+
+```
+npm install quick-ptime
+```
+
+```
+yarn add quick-ptime
+```
 
 ## Usage
 
 ```javascript
-let ptime = require('ptime');
+let ptime = require('quick-ptime');
 
 // setup a timer
 const set = ptime.setTime("my timer name");
