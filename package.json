@@ -1,0 +1,16 @@
+{
+  "name": "ptime",
+  "version": "1.0.0",
+  "description": "A simple performance timer based off process.hrtime",
+  "main": "index.js",
+  "repository": "https://github.com/shadowcodex/ptime.git",
+  "author": "shadowcodex <jsduncan98@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "npx mocha"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
