@@ -102,7 +102,7 @@ class PTime {
     }
 
     /**
-     * 
+     * Runs a function with the given value x number of times and reports benchmark
      * @param {string} name the name of this test
      * @param {function} method the method to test
      * @param {array} values the values to pass to method, deconstructed as args
@@ -122,9 +122,18 @@ class PTime {
         }
         const elapsed = this.elapsedTime(name);
         delete this.timers[name];
+        // console.log(elapsed);
         return elapsed;
     }
 
+    /**
+     * Runs function x number of times and returns average benchmark
+     * @param {string} name the name of this test
+     * @param {function} method the method to test
+     * @param {array} values the values to pass to method, deconstructed as args
+     * @param {int} rounds the number of rounds to test
+     * @param {boolean} sync whether or not function is sync or not.
+     */
     async runFunctionAverage(name, method, values, rounds, sync) {
         if(rounds === 0) {
             return 0;
@@ -133,20 +142,20 @@ class PTime {
         let sum = BigInt(0);
         for(let i = 0; i < rounds; i++) {
             if(sync) {
-                ptime.setTime(name+rounds);
+                this.setTime(name+rounds);
                 method(...values);
-                sum += ptime.elapsedTime(name+rounds).nanosecondsDiff;
-                delete ptime.timers[name+rounds];
+                sum += this.elapsedTime(name+rounds).nanosecondsDiff;
+                delete this.timers[name+rounds];
             } else {
-                ptime.setTime(name+rounds);
+                this.setTime(name+rounds);
                 await method(...values);
-                sum += ptime.elapsedTime(name+rounds).nanosecondsDiff;
-                delete ptime.timers[name+rounds];
+                sum += this.elapsedTime(name+rounds).nanosecondsDiff;
+                delete this.timers[name+rounds];
             }
             
         }
 
-        const elapsed = this.parseTime(sum / rounds);
+        const elapsed = this.parseTime(sum / BigInt(rounds));
         return elapsed;
     }
 }
